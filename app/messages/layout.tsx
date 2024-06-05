@@ -4,9 +4,8 @@ type MessageLayoutProps = {
 
 export default async function MessagesLayout({ children }: MessageLayoutProps) {
   const response = await fetch('http://localhost:8080/messages', {
-    headers: {
-      'X-ID': 'layout',
-    },
+    // cache: 'force-cache',
+    next: { revalidate: 60 },
   });
   const messages = await response.json();
   const totalMessages = messages.length;
