@@ -1,12 +1,11 @@
 type MessageLayoutProps = {
   children: React.ReactNode;
 };
+export const revalidate = 3600;
+export const dynamic = 'force-static';
 
 export default async function MessagesLayout({ children }: MessageLayoutProps) {
-  const response = await fetch('http://localhost:8080/messages', {
-    // cache: 'force-cache',
-    next: { revalidate: 60 },
-  });
+  const response = await fetch('http://localhost:8080/messages');
   const messages = await response.json();
   const totalMessages = messages.length;
 
